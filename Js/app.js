@@ -134,8 +134,7 @@ calculatorButtons.addEventListener("click", (e) => {
     e.preventDefault();
     let targetButton = e.target.classList;
     let expression = formInput.value;
-
-    if (formInput.value == "NaN" || formInput.value == "Infinity") {
+    if (formInput.value === "NaN" || formInput.value === "Infinity") {
         formInput.value = "";
     }
 
@@ -149,35 +148,92 @@ calculatorButtons.addEventListener("click", (e) => {
             removeInvalidZeroBeforeDigit(expression);
         }
         formInput.value += e.target.value;
+        return
     }
 
     //Del Button For Removing The Last Digit
     if (targetButton.contains("rem-digit-btn")) {
         removeLastCharacter(expression);
+        return;
     }
 
     //AC For Clearing The Input Screen
     if (targetButton.contains("clear-btn")) {
         formInput.value = "";
+        return;
     }
 
     //Operation Button Like + - / *
     if (targetButton.contains("oper-btn")) {
         placingOperator(e.target.value);
+        return;
     }
 
     //Decimal Button
     if (targetButton.contains("decimal-btn")) {
         placingDecimal(expression);
+        return;
     }
 
     //Calc Button 
     if (targetButton.contains("calc-btn")) {
+        if (expression.length === 0) return;
         if (!isExpressionCorrect(expression)) {
             formInput.value = "NaN";
             return;
         }
         formInput.value = +eval(expression).toFixed(6);
+        return;
     }
 });
 
+
+const body = document.querySelector("body");
+
+body.addEventListener("keypress", (e) => {
+    let expression = formInput.value;
+    const targetKey = e.key;
+    if (expression === "NaN" || expression === "Infinity") {
+        formInput.value = "";
+    }
+    if (Number.isInteger(+targetKey)) {
+        if (targetKey === 0) {
+            if (!isValidWithZero(expression))
+                return;
+        }
+        if (expression.length != 0) {
+            removeInvalidZeroBeforeDigit(expression);
+        }
+        formInput.value += targetKey;
+        return;
+    }
+    if (isOperator(targetKey)) {
+        placingOperator(targetKey);
+        return;
+    }
+    //Decimal Button
+    if (targetKey === ".") {
+        placingDecimal(expression);
+        return;
+    }
+
+    //Calc Button 
+    if (targetKey === "=") {
+        if (expression.length === 0) return;
+        if (!isExpressionCorrect(expression)) {
+            formInput.value = "NaN";
+            return;
+        }
+        formInput.value = +eval(expression).toFixed(6);
+        return;
+    }
+});
+
+body.addEventListener("keydown", (e) => {
+    const targetKey = e.key;
+    let expression = formInput.value;
+    if (targetKey === "Backspace") {
+        removeLastCharacter(expression);
+        return;
+    }
+});
