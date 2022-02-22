@@ -2,6 +2,7 @@ const calculatorButtons = document.querySelector(".calculator-button");
 
 const calculatorForm = document.querySelector(".calculator");
 const formInput = document.querySelector(".calculator input");
+// const formInputTextSize = getComputedStyle(formInput).fontSize;
 
 function removeInvalidZeroBeforeDigit(expression) {
     let expressionLength = expression.length;
@@ -134,6 +135,7 @@ calculatorButtons.addEventListener("click", (e) => {
     e.preventDefault();
     let targetButton = e.target.classList;
     let expression = formInput.value;
+    // resizeExpressionLength(expression);
     if (formInput.value === "NaN" || formInput.value === "Infinity") {
         formInput.value = "";
     }
@@ -193,6 +195,7 @@ const body = document.querySelector("body");
 body.addEventListener("keypress", (e) => {
     let expression = formInput.value;
     const targetKey = e.key;
+    // resizeExpressionLength(expression);
     if (expression === "NaN" || expression === "Infinity") {
         formInput.value = "";
     }
@@ -237,3 +240,13 @@ body.addEventListener("keydown", (e) => {
         return;
     }
 });
+
+// function resizeExpressionLength(expression) {
+//     if (expression.length < 14) {
+//         formInput.style.fontSize = formInputTextSize;
+//         return;
+//     }
+//     console.log("hello");
+//     console.log(getComputedStyle(formInput).fontSize);
+//     formInput.style.fontSize = +getComputedStyle(formInput).fontSize - 20;
+// }
