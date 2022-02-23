@@ -185,3 +185,22 @@ input {
     width: 25rem;
   }
 }
+
+@media screen and (orientation: landscape) and (max-height: 768px) {
+  html {
+    font-size: 56%;
+  }
+  .calculator {
+    width: 30rem;
+  }
+}
+
+
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  html {
+    font-size: 50%;
+  }
+  .calculator {
+    width: 25rem;
+  }
+}
