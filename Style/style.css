@@ -131,14 +131,41 @@ input {
   font-size: 1.2rem;
   font-weight: 700;
 }
+
 .red {
   background-color: rgb(241, 71, 71);
+  color: rgb(241, 71, 71);
 }
 .green {
   background-color: rgb(29, 180, 29);
+  color: rgb(29, 180, 29);
 }
 .yellow {
   background-color: rgb(250, 179, 46);
+  color: rgb(250, 179, 46);
+}
+
+.red:hover,
+.yellow:hover,
+.green:hover {
+  color: rgb(63, 63, 63);
+}
+
+/*________________ Animation _____________*/
+.calculator {
+  transform: translate(-20vmin, 5vmin);
+  animation: calculator-appears 2s ease-in-out forwards;
+}
+
+@keyframes calculator-appears {
+  0% {
+  }
+  50% {
+    transform: translate(20vmin, -10vmin);
+  }
+  100% {
+    transform: translate(0);
+  }
 }
 
 @media screen and (max-width: 768px) {
