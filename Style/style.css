@@ -188,7 +188,7 @@ input {
   }
 }
 
-@media screen and (orientation: landscape) and (max-height: 768px) {
+@media screen and (orientation: landscape) and (max-height: 700px) {
   html {
     font-size: 56%;
   }
